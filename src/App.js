@@ -1,5 +1,5 @@
+import { Button } from "react-bootstrap";
 import "./App.css";
-
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import { BrowserRouter as Browser, Routes, Route } from "react-router-dom";

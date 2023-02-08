@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
-    <Navbar bg="warning " expand="mg">
+    <Navbar bg="warning" expand="md">
       <Container>
         <Link to="/" className="navbar-brand">
           Admin CMS
@@ -16,7 +16,9 @@ export const Header = () => {
             <Link to="/" className="nav-link">
               Login
             </Link>
-            <Link to="/register">Signout</Link>
+            <Link to="/register" className="nav-link">
+              Sign Up
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
