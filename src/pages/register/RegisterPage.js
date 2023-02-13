@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import { CustomeInputeField } from "../../components/custom-inpute-field/CustomeInputeField";
+import { postNewAdmin } from "../../helper/axios";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({});
@@ -21,8 +23,13 @@ const RegisterPage = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const { confirmPassword, ...rest } = form;
-    const result = await postNewAdmin(form);
-    console.log(result);
+    if (confirmPassword !== rest.password) {
+      toast.error("Password do not match!");
+      return;
+    }
+    const { status, message } = await postNewAdmin(rest);
+
+    toast[status](message);
   };
   const inputes = [
     {
