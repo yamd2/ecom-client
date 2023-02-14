@@ -1,12 +1,19 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Footer } from "../layout/Footer";
 import { Header } from "../layout/Header";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "./authAction";
+import { Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const emailRef = useRef("");
   const passRef = useRef("");
+  const { isLoading, user } = useSelector((state) => state.user);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -16,9 +23,18 @@ const LoginPage = () => {
       password: passRef.current.value,
     };
 
-    // call axios helper to call the api
-    console.log(formDt);
+    // dispatch login action to call api
+    if (!formDt.email || !formDt.password) {
+      return alert("please fill in both the field!");
+    }
+    dispatch(loginAction(formDt));
   };
+
+  useEffect(() => {
+    user?._id && navigate("/dashboard");
+
+    //TODO: make router
+  }, [user, navigate]);
 
   return (
     <div>
@@ -50,7 +66,11 @@ const LoginPage = () => {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Submit
+            {isLoading ? (
+              <Spinner variant="warning" animation="border" />
+            ) : (
+              "submit"
+            )}
           </Button>
         </Form>
       </div>
