@@ -5,6 +5,7 @@ import { BrowserRouter as Browser, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { NewAccVerify } from "./pages/verify/NewAccVerify";
 import Dashboard from "./pages/dashbord/Dashboard";
+import ResetPassword from "./pages/reset-password/ResetPassword";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
           <Route path="register" element={<RegisterPage />} />
           <Route path="verify" element={<NewAccVerify />} />
+          <Route path="reset-password" element={<ResetPassword />} />
         </Routes>
       </Browser>
       <ToastContainer />

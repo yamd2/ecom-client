@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "./authAction";
 import { Spinner } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,6 @@ const LoginPage = () => {
         <Form className="shadow-lg rounded" onSubmit={handleOnSubmit}>
           <h3 className="text-center">Welcome Back!</h3>
           <hr className="mb-5" />
-
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -54,7 +53,6 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -64,7 +62,6 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
-
           <Button variant="primary" type="submit">
             {isLoading ? (
               <Spinner variant="warning" animation="border" />
@@ -72,6 +69,9 @@ const LoginPage = () => {
               "submit"
             )}
           </Button>
+          <div className="text-center mt-3">
+            Forgot your password? <Link to="/reset-password">Reset Now!</Link>
+          </div>
         </Form>
       </div>
       <Footer />
