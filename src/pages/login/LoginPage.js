@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "./authAction";
 import { Spinner } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -17,15 +17,13 @@ const LoginPage = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
     const formDt = {
       email: emailRef.current.value,
       password: passRef.current.value,
     };
-
-    // dispatch login action to call api
+    // disptach login action to call api
     if (!formDt.email || !formDt.password) {
-      return alert("please fill in both the field!");
+      return alert("Please fill in both the fields!");
     }
     dispatch(loginAction(formDt));
   };
@@ -33,17 +31,17 @@ const LoginPage = () => {
   useEffect(() => {
     user?._id && navigate("/dashboard");
 
-    //TODO: make router
+    // TODO: make router private and auto login
   }, [user, navigate]);
 
   return (
     <div>
       <Header />
-
       <div className="main login-page">
         <Form className="shadow-lg rounded" onSubmit={handleOnSubmit}>
           <h3 className="text-center">Welcome Back!</h3>
           <hr className="mb-5" />
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -53,6 +51,7 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -62,15 +61,17 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
+
           <Button variant="primary" type="submit">
             {isLoading ? (
-              <Spinner variant="warning" animation="border" />
+              <Spinner variant="dark" animation="border" />
             ) : (
-              "submit"
+              " Submit"
             )}
           </Button>
-          <div className="text-center mt-3">
-            Forgot your password? <Link to="/reset-password">Reset Now!</Link>
+
+          <div className="text-end">
+            Forget password? <a href="/reset-password">Reset now</a>
           </div>
         </Form>
       </div>

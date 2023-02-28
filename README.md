@@ -1,66 +1,30 @@
 # CMS Frontend
 
-In the project directory, you can run:
+Cms front end for the ecommerce platform
 
-### `npm start`
+## Work flow
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Reset password
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+when admin user forgets their password, they should be able to reset password from the system.
 
-### `npm test`
+So, FOllow the steps to build a password rest system:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. FE: show the email input form and let user submit that to api.
+2. BE: get the email data in the api and chek if user exist in our db associated with that email
+3. BE: if we have no user found, send error messesge saying user not found. that complets the transaction
+4. BE: if user found, generate a random 6 degit number and store in a session table.
+5. BE: send that reandomly generated 6 digit number to the user email addres
+6. BE: at the same time send response to frontend saying otp has been sent to their email.
+7. FE: if we receive success messsage from the backend, then show another form that requires you to entrer the opt that was sent to your email and 2 more input filds for the new password and confirm password. let user submit the form to another api
+8. BE: once user submits the form, in the api, grab that opt and password and email
+9. BE: chek if combination of email and opt exists in the sessions table, if it doesn't then simply respons saying invalid opt. If it does exist then remo the data from the session table and continue to stpe 10
+10. BE: encrypt the incomeing plain password, user table with that new ecnrypted password based on user email email.
+11. BE: once password update operation is successful, then send emai notification saying password has been changed, and also respon password updated successfully messess to the frontend.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Session Model: Sessions
+status: string
+token : string,
+association: string
+ct
+ut

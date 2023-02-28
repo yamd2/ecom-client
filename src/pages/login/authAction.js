@@ -1,16 +1,15 @@
-import { toast } from "react-toastify";
 import { loginAdmin } from "../../helper/axios";
 import { requestPending, requestSuccess } from "./authSlice";
+import { toast } from "react-toastify";
 
-export const loginAction = (FormData) => async (dispatch) => {
+export const loginAction = (formData) => async (dispatch) => {
   try {
     dispatch(requestPending());
-    console.log(FormData);
 
-    //call axios-helper / api
-    const pendingResp = loginAdmin(FormData);
+    // call axios-helper / api
+    const pendingResp = loginAdmin(formData);
 
-    toast.promise(pendingResp, { pending: "Please wait!" });
+    toast.promise(pendingResp, { pending: "Please wait ...." });
 
     const { status, message, user } = await pendingResp;
     toast[status](message);
@@ -21,7 +20,7 @@ export const loginAction = (FormData) => async (dispatch) => {
   } catch (error) {
     return {
       status: "error",
-      message: error.message,
+      message: error.messsage,
     };
   }
 };

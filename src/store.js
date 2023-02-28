@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReudcer from "./pages/login/authSlice.js";
+import authReducer from "./pages/login/authSlice";
+import catReducer from "./pages/category/categorySlice";
+import systemReducer from "./system/systemSlice";
 
 const store = configureStore({
   reducer: {
-    user: authReudcer,
+    user: authReducer,
+    category: catReducer,
+    system: systemReducer,
   },
 });
 
